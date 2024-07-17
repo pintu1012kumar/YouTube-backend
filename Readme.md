@@ -18,5 +18,13 @@
 
 ** db se jab bhi connect karo try catch , async await jarur use karen.
 
+# set express js in app.js
+
+5.  install cookie-parser
+  - npm install cookie-parser
+
+6. install cors
+   - npm install cors
+
 
  
