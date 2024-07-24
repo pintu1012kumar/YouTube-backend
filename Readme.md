@@ -25,15 +25,21 @@
 
 6. install cors
    - npm install cors
+   
 7. [model link](https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj)
 
 
 
 8. create user & video.model.js and model also.
+
 9. install  mongoose-aggregate-paginate-v2
     - npm i mongoose-aggregate-paginate-v2
+
 10. install  bcrypt and jsonwebtoken
     - npm i bcrypt & npm i jsonwebtoken
 
+11. create account on cloudinary and select node.js
+    - install  - npm i cloudinary
 
- 
+12. install multer
+   -  npm i multer 
