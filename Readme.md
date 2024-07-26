@@ -37,9 +37,12 @@
 
 10. install  bcrypt and jsonwebtoken
     - npm i bcrypt & npm i jsonwebtoken
+    -  both used in user.model.js
 
 11. create account on cloudinary and select node.js
     - install  - npm i cloudinary
 
 12. install multer
    -  npm i multer 
+
+13. create user controller and user.routes.js
