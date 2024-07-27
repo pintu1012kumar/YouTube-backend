@@ -45,4 +45,8 @@
 12. install multer
    -  npm i multer 
 
-13. create user controller and user.routes.js
+13. create user controller and user.routes.js & import routes in app.js.
+
+14. install postman 
+
+15. add register controller in user.controller.js 
