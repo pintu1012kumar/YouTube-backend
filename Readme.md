@@ -50,3 +50,5 @@
 14. install postman 
 
 15. add register controller in user.controller.js 
+
+16. send user details through postman and check data in db.
