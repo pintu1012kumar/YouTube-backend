@@ -26,7 +26,7 @@
 6. install cors
    - npm install cors
    
-7. [model link](https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj)
+7. [model prototype link](https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj)
 
 
 
@@ -52,3 +52,9 @@
 15. add register controller in user.controller.js 
 
 16. send user details through postman and check data in db.
+
+17. add loginUser in user.controller.js
+18.  add loginUser in user.controller.js
+19. create auth.middleware.js for check user is present or not
+20. set routes  login and logout in user.routes.js 
+

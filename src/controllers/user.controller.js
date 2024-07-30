@@ -4,6 +4,25 @@ import { User } from '../models/user.model.js';
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 
+
+const generateAccessAndRefereshTokens = async (userId) => {
+    try {
+        const user = await User.findById(userId)
+        const accessToken = user.generateAccessToken()
+        const refreshToken = user.generateRefreshToken()
+        
+        user.refreshToken = refreshToken
+       await  user.save({ validateBeforeSave: false })
+
+       return { accessToken,refreshToken}
+
+    } catch (error) {
+        throw new ApiError(500,"Something went wrong while generating referesh and access token")
+    }
+}
+
+
+
 const registerUser = asyncHandler (async (req,res) => {
     // res.status(200).json({
     //     message: "Hello everyone.."
@@ -96,5 +115,97 @@ const registerUser = asyncHandler (async (req,res) => {
 
 })
 
-export {registerUser}
+
+const loginUser = asyncHandler (async (req,res) =>{
+   
+    // req body -> take data 
+    // username or email
+    // find the user 
+    // password check
+    // access and refresh token
+    // send cookie
+
+    // req body -> take data 
+    const {email,username,password} = req.body
+    
+    if(!username || !email) {
+        throw new ApiError(400,"username or email is required")
+    }
+
+    // for find user,username or email who presented
+    const user = await User.findOne({
+        $or:[{username},{email}]
+    }) 
+      
+    // user not exist
+    if(!user){
+        throw new ApiError(404,"user does not exist")
+    }
+
+    // password check
+    const isPasswordValid = await user.isPasswordCorrect(password)
+    
+    if(!isPasswordValid){
+        throw new ApiError(401,"Password incorrect")
+    }
+
+   // access and refresh token
+   const {accessToken,refreshToken} = await generateAccessAndRefereshTokens(user._id)
+
+   const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
+
+   // aapki cookies koi bhi modify kar sakta hai frontend mein. after true ye sirf sever se hota hai
+   const options = {
+    httpOnly: true,
+    secure:true
+   }
+
+   return res
+   .status(200)
+   .cookie("accessToken",accessToken,options)
+   .cookie("refreshToken",refreshToken,options)
+   .json(
+       new ApiResponse(
+       200,
+       {
+           user: loggedInUser, accessToken,refreshToken
+       },
+       "User logged In Successfully"
+       )
+   )
+
+
+})
+
+const logoutUser = asyncHandler(async (req,res) => {
+    await User.findByIdAndUpdate(
+        req.user._id, 
+        {
+            $set:{
+                refreshToken: undefined
+            }
+
+        },
+        {
+            new: true
+        }
+
+    )
+
+    const options = {
+        httpOnly: true,
+        secure:true
+       } 
+       
+       return res
+       .status(200)
+       .clearCookie("accessToken",options)
+       .clearCookie("refreshToken",options)
+       .json(
+           new ApiResponse(200,  {}, "User logged Out" )
+       )
+})
+
+
+export {registerUser, loginUser, logoutUser}
 
