@@ -49,6 +49,8 @@
 
 14. install postman 
 
+14.  add auth.middleware.js
+
 15. add register controller in user.controller.js 
 
 16. send user details through postman and check data in db.
@@ -57,4 +59,5 @@
 18.  add loginUser in user.controller.js
 19. create auth.middleware.js for check user is present or not
 20. set routes  login and logout in user.routes.js 
-
+21. create refresh and access token for user in user.controller.js
+22. set route /refresh-token in user.routes.js
