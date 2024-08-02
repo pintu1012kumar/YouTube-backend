@@ -61,3 +61,7 @@
 20. set routes  login and logout in user.routes.js 
 21. create refresh and access token for user in user.controller.js
 22. set route /refresh-token in user.routes.js
+
+23. add subscription model in models
+
+24.  add  changeCurrentPassword, getCurrentUser, updateAccountDetails, updateUserAvatar,updateUserCoverImage controllers in user.controllers.js
